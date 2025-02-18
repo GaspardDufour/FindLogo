@@ -65,6 +65,6 @@ if uploaded_file is not None:
         st.write("### Logos détectés :")
         for cls in detected_classes:
             class_name = class_dict.get(cls, f"Classe {cls}")
-            st.write(f"➡️ Classe détectée : **{class_name}**")
+            st.write(f"➡️ Logo détecté : **{class_name}**")
     else:
         st.write("Aucun logo détecté.")
