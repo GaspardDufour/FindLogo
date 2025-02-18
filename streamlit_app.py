@@ -18,10 +18,10 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
 
     # Convertir en RGB si nécessaire
-    if image.mode == "P":
-        image = image.convert("RGBA")
-    else:
+    if image.mode == "RGB":
         image = image.convert("RGB")
+    else:
+        image = image.convert("RGBA")
 
     image_np = np.array(image)  # Convertir en numpy array pour OpenCV
 
