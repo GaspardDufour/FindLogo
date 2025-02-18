@@ -37,4 +37,4 @@ if uploaded_file is not None:
                         cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
     
     # Afficher l'image avec les détections
-    st.image(image_np, caption="Résultat de la détection", use_column_width=True)
+    st.image(image_np, caption="Résultat de la détection", use_container_width=True)
