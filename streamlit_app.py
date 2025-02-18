@@ -15,11 +15,11 @@ uploaded_file = st.file_uploader("Choisissez une image", type=["jpg", "png", "jp
 
 # Dictionnaire des classes et leurs noms
 class_dict = {
-    0: "Logo Microsoft",  # Exemple de classe 0
-    1: "Logo Google",  # Exemple de classe 1
-    2: "Logo Intel",  # Exemple de classe 2
-    3: "Logo Nvidia",  # Exemple de classe 3
-    4: "Logo Apple",  # Exemple de classe 4
+    0: "Microsoft",  # Exemple de classe 0
+    1: "Google",  # Exemple de classe 1
+    2: "Intel",  # Exemple de classe 2
+    3: "Nvidia",  # Exemple de classe 3
+    4: "Apple",  # Exemple de classe 4
     # Ajoute d'autres classes ici si nécessaire
 }
 
