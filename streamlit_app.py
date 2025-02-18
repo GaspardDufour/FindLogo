@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit as st
 import cv2
 import numpy as np
 from PIL import Image
@@ -17,11 +16,16 @@ uploaded_file = st.file_uploader("Choisissez une image", type=["jpg", "png", "jp
 if uploaded_file is not None:
     # Lire l'image
     image = Image.open(uploaded_file)
+    
+    # Convertir l'image en mode RGB si elle n'est pas déjà en RGB
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+    
     image_np = np.array(image)
     
     # Sauvegarde temporaire de l'image pour la passer au modèle
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
-        image.save(temp_file.name)
+        image.save(temp_file.name, "JPEG")  # Assurez-vous de l'enregistrer en JPEG
         image_path = temp_file.name
     
     # Exécuter la détection YOLO
