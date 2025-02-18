@@ -7,7 +7,7 @@ from ultralytics import YOLO
 import tempfile
 
 # Charger le modèle YOLO
-model = YOLO("yolov8n.pt")  # Remplace par le chemin vers ton modèle entraîné
+model = YOLO("yolo11n.pt")  # Remplace par le chemin vers ton modèle entraîné
 
 st.title("Détection de Logo avec YOLO")
 
