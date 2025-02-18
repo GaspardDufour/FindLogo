@@ -20,7 +20,7 @@ if uploaded_file is not None:
     image_np = np.array(image)  # Convertir en numpy array pour OpenCV
 
     # Sauvegarde temporaire
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
         image.save(temp_file.name, "PNG")  # Sauvegarde en PNG
         image_path = temp_file.name
 
