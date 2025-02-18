@@ -43,7 +43,8 @@ if uploaded_file is not None:
             cls = int(cls)  # Convertir en entier
             
             # Récupérer le nom de la classe détectée
-            class_name = class_names.get(cls, f"Classe {cls}")
+            # class_name = class_names.get(cls, f"Classe {cls}")
+            class_name=cls
             detected_classes.append(class_name)
 
             # Dessiner la boîte et le label
