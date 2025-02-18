@@ -17,15 +17,11 @@ if uploaded_file is not None:
     # Lire l'image
     image = Image.open(uploaded_file)
 
-    # Convertir en RGB pour éviter le problème avec JPEG
-    if image.mode != "RGB":
-        image = image.convert("RGB")
-
     image_np = np.array(image)  # Convertir en numpy array pour OpenCV
 
     # Sauvegarde temporaire
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
-        image.save(temp_file.name, "JPEG")  # Sauvegarde en JPEG sans transparence
+        image.save(temp_file.name, "PNG")  # Sauvegarde en PNG
         image_path = temp_file.name
 
     # Exécuter YOLO
@@ -37,7 +33,7 @@ if uploaded_file is not None:
     for result in results:
         for box in result.boxes.data:
             x1, y1, x2, y2, _, cls = box.tolist()
-            cls = int(cls)
+            cls = str(cls)
             detected_classes.append(cls)
 
             # Dessiner la bounding box
