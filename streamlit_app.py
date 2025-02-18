@@ -17,17 +17,15 @@ if uploaded_file is not None:
     # Lire l'image
     image = Image.open(uploaded_file)
 
-    # Convertir en RGB si nécessaire
-    if image.mode == "RGB":
+    # Convertir en RGB pour éviter le problème avec JPEG
+    if image.mode != "RGB":
         image = image.convert("RGB")
-    else:
-        image = image.convert("RGBA")
 
     image_np = np.array(image)  # Convertir en numpy array pour OpenCV
 
     # Sauvegarde temporaire
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
-        image.save(temp_file.name, "JPEG")
+        image.save(temp_file.name, "JPEG")  # Sauvegarde en JPEG sans transparence
         image_path = temp_file.name
 
     # Exécuter YOLO
