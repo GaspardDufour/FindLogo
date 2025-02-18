@@ -14,18 +14,15 @@ st.title("Détection de Logo avec YOLO")
 uploaded_file = st.file_uploader("Choisissez une image", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
-    # Lire l'image
+    # Lire l'image avec PIL pour l'affichage, mais la convertir en format OpenCV (BGR)
     image = Image.open(uploaded_file)
-
     image_np = np.array(image)  # Convertir en numpy array pour OpenCV
 
-    # Sauvegarde temporaire
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_file:
-        image.save(temp_file.name, "PNG")  # Sauvegarde en PNG
-        image_path = temp_file.name
+    # Convertir en BGR (format OpenCV attendu)
+    image_cv = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
 
     # Exécuter YOLO
-    results = model(image_path)
+    results = model(image_cv)
 
     detected_classes = []  # Liste des classes détectées
 
@@ -37,10 +34,10 @@ if uploaded_file is not None:
             detected_classes.append(cls)
 
             # Dessiner la bounding box
-            cv2.rectangle(image_np, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)
+            cv2.rectangle(image_cv, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)
 
     # Afficher l'image avec les bounding boxes
-    st.image(image_np, caption="Résultat de la détection", use_container_width=True)
+    st.image(image_cv, caption="Résultat de la détection", use_container_width=True)
 
     # Afficher les classes détectées
     if detected_classes:
