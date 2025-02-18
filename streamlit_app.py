@@ -6,7 +6,7 @@ from ultralytics import YOLO
 import tempfile
 
 # Charger le modèle YOLO
-model = YOLO("yolo11n.pt")  # Remplace par le chemin vers ton modèle
+model = YOLO("last.pt")  # Remplace par le chemin vers ton modèle
 
 st.title("Détection de Logo avec YOLO")
 
@@ -44,8 +44,8 @@ if uploaded_file is not None:
     # Afficher l'image avec les détections
     st.image(image_np, caption="Résultat de la détection", use_container_width=True)
     if detected_classes:
-            st.write("### Classes détectées :")
-            for cls in detected_classes:
-                st.write(f"➡️ Classe détectée : **{cls}**")
-        else:
-            st.write("Aucune classe détectée.")
+        st.write("### Classes détectées :")
+        for cls in detected_classes:
+            st.write(f"➡️ Classe détectée : **{cls}**")
+    else:
+        st.write("Aucune classe détectée.")
