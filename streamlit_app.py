@@ -7,7 +7,7 @@ import requests
 from PIL import Image
 from ultralytics import YOLO
 import tempfile
-from models.network_swinir import SwinIR
+from network_swinir import SwinIR
 
 # URL du modèle SwinIR
 MODEL_URL = "https://github.com/JingyunLiang/SwinIR/releases/download/v0.0/003_realSR_BSRGAN_DFOWMFC_s64w8_SwinIR-L_x4_GAN.pth"

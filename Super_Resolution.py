@@ -1,7 +1,7 @@
 import torch
 import cv2
 import numpy as np
-from models.network_swinir import SwinIR
+from network_swinir import SwinIR
 
 def load_swinir_model(model_path):
     """
