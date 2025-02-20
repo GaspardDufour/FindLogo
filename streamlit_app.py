@@ -39,7 +39,7 @@ if uploaded_file is not None:
         image_path = temp_file.name
 
     # Exécuter YOLO
-    results = model(image_path)
+    results = model_yolo(image_path)
     detected_classes = []
     # Dessiner les boîtes et écrire le nom de la classe
     for result in results:
