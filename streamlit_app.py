@@ -6,7 +6,12 @@ from ultralytics import YOLO
 import tempfile
 
 # Charger le modèle YOLO
-model = YOLO("last.pt")  # Remplace par le chemin vers ton modèle
+model_yolo = YOLO("last.pt")  # Remplace par le chemin vers ton modèle
+
+st.title("Détection de Logo avec YOLO")
+
+# Upload d'image
+uploaded_file = st.file_uploader("Choisissez une image", type=["jpg", "png", "jpeg"])
 
 # Dictionnaire des classes et leurs noms
 class_dict = {
@@ -39,24 +44,24 @@ def detect_logo():
             image.save(temp_file.name, "JPEG")
             image_path = temp_file.name
 
-        # Exécuter YOLO
-        results = model(image_path)
-        detected_classes = []
-        # Dessiner les boîtes et écrire le nom de la classe
-        for result in results:
-            for box in result.boxes.data:
-                x1, y1, x2, y2, conf, cls = box.tolist()
-                cls = int(cls)  # Convertir en entier
+    # Exécuter YOLO
+    results = model_yolo(image_path)
+    detected_classes = []
+    # Dessiner les boîtes et écrire le nom de la classe
+    for result in results:
+        for box in result.boxes.data:
+            x1, y1, x2, y2, conf, cls = box.tolist()
+            cls = int(cls)  # Convertir en entier
 
-                # Dessiner la boîte
-                cv2.rectangle(image_np, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)
+            # Dessiner la boîte
+            cv2.rectangle(image_np, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 3)
 
-                # Ajouter la classe détectée à la liste
-                detected_classes.append(cls)
+            # Ajouter la classe détectée à la liste
+            detected_classes.append(cls)
 
-                # Ajouter le texte de la classe détectée à côté de la boîte
-                class_name = class_dict.get(cls, f"Classe {cls}")  # Utiliser le dictionnaire pour récupérer le nom de la classe
-                cv2.putText(image_np, class_name, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+            # Ajouter le texte de la classe détectée à côté de la boîte
+            class_name = class_dict.get(cls, f"Classe {cls}")  # Utiliser le dictionnaire pour récupérer le nom de la classe
+            cv2.putText(image_np, class_name, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
         # Afficher l'image avec les détections
         st.image(image_np, caption="Résultat de la détection", use_container_width=True)
