@@ -6,7 +6,7 @@ from ultralytics import YOLO
 import tempfile
 
 # Charger le modèle YOLO
-model = YOLO("last.pt")  # Remplace par le chemin vers ton modèle
+model_yolo = YOLO("last.pt")  # Remplace par le chemin vers ton modèle
 
 st.title("Détection de Logo avec YOLO")
 
