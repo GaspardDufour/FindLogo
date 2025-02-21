@@ -93,7 +93,7 @@ def enhance_image_ui():
         # Convertir BGR → RGB avant affichage et téléchargement
         enhanced_img_rgb = cv2.cvtColor(enhanced_img, cv2.COLOR_BGR2RGB)
          # Affichage correct
-        st.image(enhanced_img_rgb, caption="Image Améliorée", use_container_width=True)
+        st.image(enhanced_img, caption="Image Améliorée", use_container_width=True)
 
         # Téléchargement avec les vraies couleurs
         st.download_button("Télécharger l'image améliorée",
