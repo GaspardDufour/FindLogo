@@ -90,9 +90,14 @@ def enhance_image_ui():
         st.image(image, caption="Image originale", use_container_width=True)
         with st.spinner("Amélioration en cours..."):
             enhanced_img = enhance_image(image, model, device)
-        st.image(enhanced_img, caption="Image Améliorée", use_container_width=True)
+        # Convertir BGR → RGB avant affichage et téléchargement
+        enhanced_img_rgb = cv2.cvtColor(enhanced_img, cv2.COLOR_BGR2RGB)
+         # Affichage correct
+        st.image(enhanced_img_rgb, caption="Image Améliorée", use_container_width=True)
+
+        # Téléchargement avec les vraies couleurs
         st.download_button("Télécharger l'image améliorée",
-                           data=cv2.imencode(".jpg", enhanced_img)[1].tobytes(),
+                           data=cv2.imencode(".jpg", enhanced_img_rgb)[1].tobytes(),
                            file_name="image_amelioree.jpg",
                            mime="image/jpeg")
 
